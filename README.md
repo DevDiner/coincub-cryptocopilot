@@ -5,7 +5,7 @@ CoinCub is a sophisticated Telegram bot that acts as a crypto research assistant
 *This project was developed for the CoinGecko MCP Hackathon 2025.*
 
 ![CoinCub Demo](https://i.imgur.com/your-demo-image-or-gif.gif)
-*<-- Replace with a cool screenshot or GIF of your bot in action!*
+*<-- To be replaced with a cool screenshot or GIF of the bot in action!*
 
 ## Features
 
@@ -40,8 +40,8 @@ Follow these instructions to get a local copy up and running.
 
 1.  **Clone the repository:**
     ```sh
-    git clone https://github.com/your-username/coincub-bot.git
-    cd coincub-bot
+    git clone https://github.com/DevDiner/coincub-cryptocopilot.git
+    cd cryptocopilot
     ```
 
 2.  **Create and activate a virtual environment (recommended):**
@@ -72,10 +72,10 @@ Follow these instructions to get a local copy up and running.
 
 To run this project, you will need to add the following environment variables to your `.env` file:
 
-`COINCUB_BOT_TOKEN=` (Your Telegram bot token)
-`RSS_COINDESK=` (Full URL for CoinDesk RSS feed)
-`RSS_COINTELEGRAPH=` (Full URL for CoinTelegraph RSS feed)
-`RSS_DECRYPT=` (Full URL for Decrypt RSS feed)
+- `COINCUB_BOT_TOKEN=` (Telegram bot token)
+- `RSS_COINDESK=` (Full URL for CoinDesk RSS feed)
+- `RSS_COINTELEGRAPH=` (Full URL for CoinTelegraph RSS feed)
+- `RSS_DECRYPT=` (Full URL for Decrypt RSS feed)
 
 ## Prompt Engineering
 
@@ -83,6 +83,6 @@ A key component of CoinCub is the detailed system prompt located in `prompt/GEMI
 
 ## Hackathon Submission
 
-This project is a submission for the **CoinGecko MCP Hackathon**. It demonstrates the power of combining a large language model with real-time, high-quality financial data from the CoinGecko MCP to create a truly useful tool for crypto enthusiasts.
+This project is a submission for the **CoinGecko MCP Hackathon**. It demonstrates the power of combining a large language model with real-time, high-quality financial data from the CoinGecko MCP to create a useful tool for crypto enthusiasts.
 
 ---
