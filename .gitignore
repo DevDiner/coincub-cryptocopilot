@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.log
+
+# --- OS
+.DS_Store
+
+# Virtual Environment
+venv/
+env/
+
+# secrets
+.env
+*.key
+*.pem
+
+# Claude Desktop config (local user secrets)
+*.json
+!prompt.md   # allow prompt markdown if stored as code
+
+# Mac & Windows OS noise
+.DS_Store
+Thumbs.db
+
+# VSCode or JetBrains IDE settings
+.vscode/
+.idea/
+
+# Output
+*.zip
+*.tar.gz
+
+# Jupyter or notebook backups (if used later)
+.ipynb_checkpoints/
+
+# Claude logs or backups (if any)
+claude*.log
+claude_backup_*.txt
+/memory
+
+# Render or deployment cache
+render.yaml.local
+*.bak
+*.swp
+*.tmp
+render.yaml
+
+# Logs
+/logs/
+/memory/
+*.log
+query_log.json
+/archive/
+
+# --- Build artifacts
+dist/
+build/
+EOF
