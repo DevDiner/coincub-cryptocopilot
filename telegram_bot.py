@@ -8,8 +8,8 @@ from telegram.constants import ParseMode, ChatAction #ChatType
 from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filters
 from telegram.helpers import escape_markdown
 from dotenv import load_dotenv
-from flask import Flask
-from threading import Thread
+# from flask import Flask
+# from threading import Thread
 
 from fetch_rss import fetch_token_headlines
 from extract_token import extract_token_name_symbol
@@ -99,26 +99,26 @@ async def ask_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await send_safe_reply(current_update, response)
         print(f"✅ Response successfully sent to chat_id: {current_chat_id}")
 
-#This part is for the web server to keep our block awake
-app = Flask('')
+# #This part is for the web server to keep our block awake
+# app = Flask('')
 
-@app.route('/')
-def home():
-    return "CoinCub is alive!"
+# @app.route('/')
+# def home():
+#     return "CoinCub is alive!"
 
-def run_web_server():
-  # Runs the Flask app on the host and port Render expects
-  app.run(host='0.0.0.0', port=8080)
+# def run_web_server():
+#   # Runs the Flask app on the host and port Render expects
+#   app.run(host='0.0.0.0', port=8080)
 
-def keep_alive():
-    # Starts the web server in a separate thread
-    t = Thread(name='keep_alive_thread', target=run_web_server)
-    t.daemon = True # Allows the main bot to exit even if this thread is running
-    t.start()
+# def keep_alive():
+#     # Starts the web server in a separate thread
+#     t = Thread(name='keep_alive_thread', target=run_web_server)
+#     t.daemon = True # Allows the main bot to exit even if this thread is running
+#     t.start()
 
 def run_bot():
     
-    keep_alive() 
+    # keep_alive() 
 
     print("✅ Bot is now listening..."); app = ApplicationBuilder().token(COINCUB_BOT_TOKEN).build(); app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, ask_handler)); app.run_polling()
 if __name__ == "__main__": asyncio.run(run_bot())
