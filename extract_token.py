@@ -1,4 +1,4 @@
-# extract_token.py
+#extract_token.py
 import re
 
 def extract_token_name_symbol(user_input: str) -> list[str]:
@@ -9,17 +9,41 @@ def extract_token_name_symbol(user_input: str) -> list[str]:
     if not user_input:
         return []
 
-    # A comprehensive list of words to ignore.
+    # A comprehensive, expanded list of words to ignore.
     stop_words = {
+        # Standard Stop Words (articles, prepositions, pronouns, etc.)
         'a', 'about', 'after', 'all', 'also', 'am', 'an', 'and', 'any', 'are', 'as', 'at', 'be',
-        'because', 'been', 'but', 'by', 'can', 'compare', 'could', 'did', 'do', 'does', 'doing',
-        'for', 'from', 'further', 'had', 'has', 'have', 'having', 'he', 'her', 'how', 'i', 'if',
-        'in', 'into', 'is', 'it', 'its', 'just', 'latest', 'me', 'more', 'my', 'no', 'not', 'now',
-        'of', 'on', 'or', 'our', 'price', 'risk', 'risky', 'safe', 'should', 'so', 'some',
-        'tell', 'than', 'that', 'the', 'their', 'them', 'then', 'there', 'these', 'they', 'this',
+        'because', 'been', 'but', 'by', 'can', 'could', 'did', 'do', 'does', 'doing', 'for', 
+        'from', 'further', 'had', 'has', 'have', 'having', 'he', 'her', 'how', 'i', 'if', 'in', 
+        'into', 'is', 'it', 'its', 'just', 'me', 'more', 'my', 'no', 'not', 'now', 'of', 'on', 
+        'or', 'our', 'should', 'so', 'some', 'than', 'that', 'the', 'their', 'them', 'then', 
+        'there', 'these', 'they', 'this', 'to', 'up', 'us', 'was', 'we', 'were', 'what', 'when', 
+        'where', 'which', 'who', 'why', 'will', 'with', 'would', 'you', 'your','goes', 'going',
 
-        'to', 'today', 'tomorrow', 'up', 'us', 'versus', 'vs', 'was', 'we', 'were', 'what', 'when',
-        'where', 'which', 'who', 'why', 'will', 'with', 'would', 'yesterday', 'you', 'your','ytd','tmr','tmrw'
+        # Action & Intent Words
+        'analyze', 'buy', 'check', 'compare', 'explain', 'find', 'get', 'give', 'go', 'going',
+        'know', 'list', 'look', 'see', 'sell', 'show', 'tell', 'trade', 'view', 'tell', 'tells', 
+
+        # Financial & Crypto Terms
+        'cap', 'chart', 'coin', 'coins', 'crypto', 'data', 'details', 'info', 'information',
+        'liquidity', 'market', 'movers', 'overview', 'performance', 'performing', 'price', 
+        'prices', 'report', 'stats', 'summary', 'token', 'tokens', 'value', 'volatility', 'volume', 'tokens', 'token',
+
+        # Descriptive & Qualitative Words
+        'bad', 'best', 'good', 'high', 'hot', 'latest', 'low', 'new', 'recent', 'safe', 'top', 
+        'trending', 'worse', 'worst', 'risky', 'trendiest', 'trendy'
+
+        # Time-related Words
+        'currently', 'today', 'tomorrow', 'tmrw', 'tmr','yesterday','ytd','now',        
+
+        #Quantifiers
+        'all', 'any', 'each', 'every', 'few', 'most', 'some',
+
+        # Conversational Fillers
+        'hello', 'help', 'hey', 'ok', 'okay', 'please', 'thanks', 'thank', 'pls' ,'plz', 'thx',
+
+        # Other Common Nouns/Verbs
+        'versus', 'vs' ,'compare', 'comparing',
     }
 
     # Normalize input: lowercase
@@ -29,12 +53,11 @@ def extract_token_name_symbol(user_input: str) -> list[str]:
     dollar_symbols = re.findall(r'\$([a-zA-Z0-9]{2,10})', normalized_input)
     normalized_input = re.sub(r'\$[a-zA-Z0-9]{2,10}', '', normalized_input)
 
-    # **THE CRITICAL CHANGE**: Aggressively remove all punctuation, including apostrophes from contractions.
-    # This turns "how's" into "hows", "what's" into "whats", etc.
+    # Aggressively remove all punctuation, including apostrophes from contractions.
     normalized_input = re.sub(r'[^\w\s-]', '', normalized_input)
 
     # Add contraction variations to the stop word list
-    stop_words.update(['hows', 'whats', 'wheres', 'whens', 'whys', 'its', 'whos'])
+    stop_words.update(['hows', 'whats', 'wheres', 'whens', 'whys', 'its'])
 
     # Find all remaining word-based tokens and filter them
     potential_tokens = re.findall(r'\b[a-zA-Z0-9-]{2,20}\b', normalized_input)

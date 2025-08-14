@@ -6,7 +6,7 @@ from datetime import datetime
 
 LOG_PATH = "query_log.json"
 
-def get_gemini_analysis(tokens: list, news_md: str, user_query: str, chat_id: str, memory: list) -> str:
+def get_gemini_analysis(tokens: list, news_md: str, user_query: str, chat_id: str, memory: list, fallback_callback=None) -> str:
     """
     Constructs a dynamic prompt for the Gemini CLI, now with a "Safety Net" instruction.
     """
@@ -30,7 +30,7 @@ def get_gemini_analysis(tokens: list, news_md: str, user_query: str, chat_id: st
 - **User History:** {memory_str}
 - **User's Query:** "{user_query}"
 
-**Your Instructions:** FPerform a full analysis of **{token}**, synthesizing MCP data with the **Relevant News** provided. Follow your core rules in `GEMINI.md`.
+**Your Instructions:** Perform a full analysis of **{token}**, synthesizing MCP data with the **Relevant News** provided. Follow your core rules in `GEMINI.md`.
 """
     elif len(tokens) == 2:
         token1, token2 = tokens
@@ -85,8 +85,8 @@ This is your only fallback. Your primary goal is to use the tools as described i
         try:
             print(f"Attempting to use model: {model}...")
             result = subprocess.run(
-                ["gemini", "--model", model, "--prompt", final_prompt],
-                capture_output=True, text=True, timeout=300, check=True
+                ["gemini", "--model", model],
+                capture_output=True, text=True, input=final_prompt, timeout=300, check=True
             )
             
             raw_output = result.stdout.strip()
@@ -102,27 +102,34 @@ This is your only fallback. Your primary goal is to use the tools as described i
                 print(f"⚠️ Model '{model}' ran successfully but returned an empty response. Trying next model...")
                 # Set the flag if a model fails
                 fallback_occurred = True
+                if fallback_callback:
+                    fallback_callback(model)
                 continue
 
         except (subprocess.TimeoutExpired, subprocess.CalledProcessError) as e:
             print(f"⚠️ Model '{model}' failed. Error: {e}. Trying next model...")
             fallback_occurred = True
+            if fallback_callback:
+                fallback_callback(model)
             continue
+
         except Exception as e:
             print(f"An unexpected error occurred with model '{model}'. Error: {e}. Trying next model...")
             fallback_occurred = True
+            if fallback_callback:
+                fallback_callback(model)
             continue
 
     if final_output:
         # If a fallback happened, prepend a friendly notification message.
-        if fallback_occurred:
-            notification_message = "ℹ️ My primary AI model is currently busy. I've switched to a faster alternative to get you a response. The analysis continues below."
-            final_response_to_user = f"{notification_message}\n\n---\n\n{final_output}"
-        else:
-            final_response_to_user = final_output
+        # if fallback_occurred:
+            # notification_message = "ℹ️ My primary AI model is currently busy. I've switched to a faster alternative to get you a response. The analysis continues below."
+        #     final_response_to_user = f"{notification_message}\n\n---\n\n{final_output}"
+        # else:
+        #     final_response_to_user = final_output
             
-        if chat_id: _log_query(chat_id, {"timestamp": datetime.utcnow().isoformat(), "query": user_query, "response": final_response_to_user[:4000]})
-        return final_response_to_user
+        if chat_id: _log_query(chat_id, {"timestamp": datetime.utcnow().isoformat(), "query": user_query, "response": final_output[:4000]})
+        return final_output
     else:
         return "❌ A critical error occurred. All available AI models failed to respond. Please try again later."
 
