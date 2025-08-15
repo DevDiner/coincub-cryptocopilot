@@ -4,7 +4,7 @@ CoinCub is a sophisticated Telegram bot that acts as a crypto research assistant
 
 *This project was developed for the CoinGecko MCP Hackathon 2025.*
 
-![CoinCub Demo]([https://i.imgur.com/your-demo-image-or-gif.gif](https://github.com/user-attachments/assets/264b5439-0abb-4323-80e6-c2d164f6a838))
+![CoinCub Demo]((https://github.com/user-attachments/assets/264b5439-0abb-4323-80e6-c2d164f6a838))
 
 
 
