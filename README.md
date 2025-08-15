@@ -7,7 +7,7 @@
   <img src="./media/CGHackathonOfficialDemoVideo.gif" alt="CoinCub demo preview" width="400" />
 </p>
 <p align="center">
-  <a href="./media/CGHackathonOfficialDemoVideomo.mp4">🎥 Watch the full demo with sound (MP4)</a>
+  <a href="./media/CGHackathonOfficialDemoVideo.mp4">🎥 Watch the full demo with sound (MP4)</a>
 </p>
 
 CoinCub is a sophisticated Telegram bot that acts as a crypto research assistant. Powered by Google's Gemini and live data from the CoinGecko MCP, it provides real-time token analysis, comparisons, and conversational insights directly in your chat.
