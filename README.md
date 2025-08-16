@@ -62,6 +62,9 @@ Follow these instructions to get a local copy up and running.
 1.  **Set up the Google Gemini CLI:**
     -   This project requires the Gemini command-line tool to be installed and authenticated with your Google AI API key.
     -   **Please follow the official instructions here to set it up:** [https://github.com/google-gemini/gemini-cli/blob/main/README.md](https://github.com/google-gemini/gemini-cli/blob/main/README.md)
+    ```sh
+    npm install -g @google/gemini-cli
+    ```
 
 2.  **Clone the repository:**
     ```sh
