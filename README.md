@@ -1,4 +1,4 @@
-# CoinCub - Your Intelligent Crypto Copilot (LLM + MCP Integration)
+# CoinCub - Your Intelligent Crypto Copilot (LLM + MCP Tooling Integration)
 
 <p align="center">
 </p>
